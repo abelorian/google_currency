@@ -128,7 +128,9 @@ class Money
 
         from, to = Currency.wrap(from), Currency.wrap(to)
 
-        data = build_uri(from, to).read
+        begin
+          data = build_uri(from, to).read
+        end until data.include?("<form")
         rate = extract_rate(data);
 
         if (rate < 0.1)
